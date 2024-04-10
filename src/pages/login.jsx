@@ -26,8 +26,8 @@ export default function Login() {
 
     return(
         <>
-            <div className="bg-slate-500 min-h-screen flex items-center justify-center place-items-center">
-                <div className="bg-white p-8 rounded-lg shadow-md w-96">
+            <div className="bg-slate-100 min-h-screen flex items-center justify-center place-items-center">
+                <div className="bg-slate-50 p-8 rounded-lg shadow-md w-96">
                     <h1 className="text-2xl font-bold mb-6">Iniciar Sesión</h1>
                     <form className='grid' onSubmit={handleSubmit}>
                         <label className="mb-4">
