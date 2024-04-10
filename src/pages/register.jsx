@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import {Link, useNavigate} from 'react-router-dom'
 import fetchRegister from '../fetchs/fetchRegister';
 import fetchUsers from '../fetchs/fetchUsers'
+import SignLayOut from '../components/forms/sign-layout';
+import SubmitButton from '../components/forms/SubmitButton';
+
 
 function Register() {
   const [username, setUsername] = useState('');
@@ -28,8 +31,7 @@ function Register() {
   };
 
   return (
-    <div className="bg-slate-500 min-h-screen flex items-center justify-center">
-      <div className="bg-white p-8 rounded shadow-md w-96">
+    <SignLayOut>
         <h1 className="text-2xl font-bold mb-6">Registro</h1>
         <form className='grid' onSubmit={handleSubmit}>
           <label className="mb-4">
@@ -62,16 +64,10 @@ function Register() {
               className="mt-1 block w-full rounded-md p-1 focus:outline-slate-400 border-black border-2 placeholder:italic placeholder:text-slate-400"
             />
           </label>
-          <button
-            type="submit"
-            className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
-          >
-            Registrarse
-          </button>
+          <SubmitButton>Registrarse</SubmitButton>
           <p className='text-gray-700 text-center'>¿Ya tienes cuenta? <Link to='/login' className='font-bold'>Inicia Sesion</Link></p>
         </form>
-      </div>
-    </div>
+    </SignLayOut>
   );
 }
 
