@@ -11,11 +11,15 @@ function HeaderItem(link, text, image){
     )
 }
 
-const Header = () => {
-    navigation=[['/','Home', '/home.svg'],
-                ['/login','Login', '/log-in.svg'],
-                ['/Register','Register','/user.svg']]
-
+const Header = ({type}) => {
+    if (type=='loged'){
+        navigation=[['/dashboard','Mi Cuenta', '/user.svg'],
+        ['/','Logout', '/log-out.svg']]
+    }else{
+        navigation=[['/','Home', '/home.svg'],
+        ['/login','Login', '/log-in.svg'],
+        ['/Register','Register','/user.svg']]
+    }
 
     return(
         <header className="flex flex-row content-center justify-between p-4 text-4xl font-bold bg-slate-900 m-auto fixed w-full h-24">
