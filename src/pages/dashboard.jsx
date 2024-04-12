@@ -1,39 +1,35 @@
-import {useLocation} from 'react-router-dom';
-import { useState, useEffect } from 'react';
-import DashLayOut from '../components/DashLayOut';
+import { useGlobalContext } from "../context/globalContext";
+import { useState } from "react";
+import DashLayOut from "../components/DashLayOut";
 
-const Dashboard= () => {
-    
-    const [user, setUser] = useState({})
-    const location = useLocation();
-            
+const Dashboard = () => {
+  const { sideBarSelected } = useGlobalContext();
 
-    useEffect(()=>{
-        async function getUser(){
-            const usuario = location.state.user
-            setUser(usuario)
-        }
-        getUser()
-    },[])
+  const finanzaDash = () => {
+    return (
+      <div className="w-full max-w-full py-10 bg-white">
+        <h1>Finanzas</h1>
+      </div>
+    );
+  };
 
+  const tagsDash = () => {
+    return (
+      <div>
+        <h1>Etiquetas</h1>
+      </div>
+    );
+  };
 
-
-    return(
-        <>
-            <div className="pt-24 min-h-screen h-screen flex flex-col items-center justify-start bg-slate-100">
-                <DashLayOut>
-                    <div className="block text-slate-700 text-center w-11/12 mb-5 ">
-                        <h1 className="text-4xl font-bold mb-4">DashBoard</h1>
-                        <p className="text-2xl font-bold mb-4 inline-block">Bienvenido {user.name} - {user.email}</p>
-                    </div>
-                    <div className='bg-slate-300 text-center rounded-lg w-11/12'>
-                    Tus Finanzas
-                    </div>
-                </DashLayOut>
-            </div>
-        </>
-        
-    )
-}
+  return (
+    <>
+      <div className="pt-24 min-h-screen h-screen bg-slate-100">
+        <DashLayOut>
+          {sideBarSelected === "finanzas" ? finanzaDash() : tagsDash()}
+        </DashLayOut>
+      </div>
+    </>
+  );
+};
 
 export default Dashboard;
