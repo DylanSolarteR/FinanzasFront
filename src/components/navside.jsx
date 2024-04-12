@@ -27,7 +27,7 @@ export default function NavSide(){
 
     return(
     <>
-    <div className={"bg-slate-200 duration-300 transition-all " +(state==1? "animation-expand w-64":"w-12")}>
+    <div className={"bg-slate-200 duration-100 transition-all " +(state==1? "animation-expand w-64":"w-12")}>
     <button className='bg-slate-300 transition-colors duration-300 inline-flex w-full h-10 hover:bg-slate-400 items-center ' onClick={
                 ()=>{cambiar_estado(state)}
                 }>
