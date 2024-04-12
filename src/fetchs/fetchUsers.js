@@ -5,7 +5,7 @@ export default async function fetchUsers(auth) {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        // Authorization: auth
+        Authorization: auth
       },
     });
 

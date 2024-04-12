@@ -14,7 +14,7 @@ export default function Login() {
   const navigate = useNavigate();
 
   async function getUser(auth) {
-    const fetchedUsers = await fetchUsers();
+    const fetchedUsers = await fetchUsers(auth);
     const usuario = fetchedUsers.usuarios.find((u) => u.email == email);
     return usuario;
   }
@@ -23,7 +23,7 @@ export default function Login() {
     e.preventDefault();
     const response = await validarLogin(email, password);
     if (response) {
-      const user = await getUser();
+      const user = await getUser(response.token);
       setUser(user);
       setIsLogged(true);
       setToken(response.token);

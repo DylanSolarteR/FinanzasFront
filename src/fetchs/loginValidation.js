@@ -11,7 +11,7 @@ export default async function validarLogin(correo, pw) {
       body: JSON.stringify({
         email: correo,
         pss: pw,
-      }),
+      })
     });
 
     if (response.ok) {
