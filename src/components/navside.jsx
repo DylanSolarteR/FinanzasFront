@@ -5,7 +5,7 @@ import { useGlobalContext } from "../context/globalContext";
 function NavButton({ text, imgsrc, handler }) {
   return (
     <Link
-      className="py-4 text-slate-700 hover:bg-slate-800 group rounded transition-colors duration-300 flex justify-center items-center"
+      className="py-4 text-slate-700 hover:bg-slate-800 group rounded transition-colors duration-300 flex justify-center items-center select-none"
       onClick={handler}
     >
       <img
@@ -48,12 +48,12 @@ export default function NavSide() {
     <>
       <div
         className={
-          "bg-slate-200 duration-100 transition-all " +
+          "bg-slate-200 duration-100 transition-all min-w-64 " +
           (state == 1 ? "animation-expand w-64" : "w-12")
         }
       >
         <button
-          className="bg-slate-300 transition-colors duration-300 inline-flex w-full h-10 hover:bg-slate-400 items-center "
+          className="bg-slate-300 transition-colors duration-300 inline-flex w-full h-10 hover:bg-slate-400 items-center select-none"
           onClick={() => {
             cambiar_estado(state);
           }}

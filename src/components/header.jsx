@@ -3,7 +3,7 @@ import { useGlobalContext } from "../context/globalContext";
 
 function HeaderItem(link, text, image, handler, key) {
   return (
-    <li className="inline-block" key={key}>
+    <li className="inline-block select-none" key={key}>
       <Link
         onClick={handler}
         className="px-8 py-4 text-slate-200 hover:bg-slate-800 rounded transition-colors duration-300 flex justify-between"
