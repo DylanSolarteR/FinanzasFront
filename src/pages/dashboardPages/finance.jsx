@@ -3,6 +3,8 @@ import DataTable from "../../components/DataTable";
 import HiddenFormlayout from "../../components/HiddenFormlayout";
 import CircleButton from "../../components/CircleButton";
 import FinanceForm from "./dashboardForms/Financeform";
+import deleteFinanzas from "../../fetchs/deleteFinanzas";
+
 export default function Finance(){
     const {userFinanzas} = useGlobalContext();
 
@@ -13,8 +15,13 @@ export default function Finance(){
         <div className="flex justify-between"> 
         {(userFinanzas??[]).length==0? "No hay registros": <DataTable data={userFinanzas}/>}
         {(userFinanzas??[]).length==0? "": <table><th>Acciones</th>{userFinanzas.map((data)=>(
-                <tr><CircleButton src='/edit.svg' id={'edit'+data['_id']} className="bg-slate-600 p-2 hover:bg-slate-500" onClick={()=>(console.log('ok'+data['_id']))}/>
-                    <CircleButton src='/delete.svg' id={'delete'+data['_id']} className="bg-slate-600 p-2 hover:bg-rose-500" onClick={()=>(console.log('ok'+data['_id']))}/>
+                <tr><CircleButton src='/edit.svg' id={'edit'+data['_id']} className="bg-slate-600 p-2 hover:bg-slate-500" onClick={()=>(
+                        console.log('ok'+data['_id'])
+                    )}/>
+                    <CircleButton src='/delete.svg' id={'delete'+data['_id']} className="bg-slate-600 p-2 hover:bg-rose-500" onClick={()=>(
+                        deleteFinanzas(data['_id'])
+                        
+                    )}/>
                 </tr>
         ))}</table>}
         </div>

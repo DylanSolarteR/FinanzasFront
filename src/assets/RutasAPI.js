@@ -4,4 +4,6 @@ export const RutasAPI = {
   Login: "http://localhost:3000/usuario/login",
   NewFinanza: "http://localhost:3000/finanza/add",
   NewTag: "http://localhost:3000/tag/add",
+  DeleteFinanza: "http://localhost:3000/finanza/delete/",
+  DeleteTags: "http://localhost:3000/tag/delete/",
 };
