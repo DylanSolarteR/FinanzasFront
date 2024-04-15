@@ -9,7 +9,7 @@ const Dashboard = () => {
 
   return (
     <>
-      <div className="pt-24 min-h-screen h-screen bg-slate-100">
+      <div className="pt-24 min-h-screen h-full bg-slate-100">
         <DashLayOut>
           {sideBarSelected === "finanzas" ? <Finance></Finance> : <Tags></Tags>}
         </DashLayOut>

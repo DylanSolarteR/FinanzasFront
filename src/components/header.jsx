@@ -54,7 +54,7 @@ const Header = () => {
   }
 
   return (
-    <header className="flex flex-row content-center justify-between p-4 text-4xl font-bold bg-slate-900 m-auto fixed w-full h-24">
+    <header className="z-50 flex flex-row content-center justify-between p-4 text-4xl font-bold bg-slate-900 m-auto fixed w-screen h-24">
       <h1 className="text-slate-200 self-center text-center select-none mx-8">
         AppFinanzas
       </h1>
