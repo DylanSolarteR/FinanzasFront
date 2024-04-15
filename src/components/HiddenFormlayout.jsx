@@ -1,4 +1,5 @@
 import { useState } from "react"
+import CircleButton from "./CircleButton";
 
 export default function HiddenFormlayout({children}){
     let [visible, setVisible] = useState(false);
@@ -7,9 +8,12 @@ export default function HiddenFormlayout({children}){
         setVisible(!visible);
     }
     return(<div className="py-4">
-            <button className="rounded-full bg-slate-600 p-2 hover:bg-slate-500 hover:scale-105 animation-all duration-300" onClick={()=>{change(visible)}}>
-                <img src="/plus.svg" className={"invert animate-all duration-200 "+ (visible? "rotate-45":"rotate-0")}></img>
-            </button>
+            <CircleButton   id='add'
+                            src="/plus.svg"
+                            imageClassName={"animate-all duration-200 "+(visible? "rotate-45":"rotate-0")}
+                            className={(visible? "bg-rose-600 hover:bg-rose-500":"bg-slate-600 hover:bg-slate-500")}
+                            onClick={()=>{change(visible)}}/>
+                            
             <div className={"py-4 px-4 mx-auto "+(visible? "":"hidden")}>
                 {children}
             </div>
