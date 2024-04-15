@@ -27,16 +27,19 @@ export default function Finance(){
                     <input type="text" className="mt-1 w-full rounded-md p-1 focus:outline-slate-400 border-black border-2 placeholder:italic placeholder:text-slate-400"/>
                 </label>
                 <label>Precio
-                    <input type="text" className="mt-1 w-full rounded-md p-1 focus:outline-slate-400 border-black border-2 placeholder:italic placeholder:text-slate-400"/>
+                    <input type="number" className="mt-1 w-full rounded-md p-1 focus:outline-slate-400 border-black border-2 placeholder:italic placeholder:text-slate-400"/>
                 </label>
                 <label>Método de pago
-                    <input type="text" className="mt-1 w-full rounded-md p-1 focus:outline-slate-400 border-black border-2 placeholder:italic placeholder:text-slate-400"/>
+                    <select type="text" className="mt-1 w-full rounded-md p-1 focus:outline-slate-400 border-black border-2 placeholder:italic placeholder:text-slate-400">
+                    <option>Tarjeta</option>
+                    <option>Efectivo</option>
+                    </select>
                 </label>
                 <label>Fecha
-                    <input type="text" className="mt-1 w-full rounded-md p-1 focus:outline-slate-400 border-black border-2 placeholder:italic placeholder:text-slate-400"/>
+                    <input type="datetime-local" className="mt-1 w-full rounded-md p-1 focus:outline-slate-400 border-black border-2 placeholder:italic placeholder:text-slate-400"/>
                 </label>
                 <label>Tipo
-                    <input type="text" className="mt-1 w-full rounded-md p-1 focus:outline-slate-400 border-black border-2 placeholder:italic placeholder:text-slate-400"/>
+                    <input type="checkbox" className="mt-1 w-full rounded-md p-1 focus:outline-slate-400 border-black border-2 placeholder:italic placeholder:text-slate-400"/>
                 </label>
                 <div className="py-4">
                     <SubmitButton> ACEPTAR </SubmitButton>
