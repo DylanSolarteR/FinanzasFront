@@ -16,7 +16,13 @@ export default function FinanceForm(){
     const handleSubmit= async (e)=>{
         e.preventDefault();
         const response = await newFactura(name, description, price, paymethod, date, type, [], user);
-        console.log(response)
+        if(response){
+            setName('')
+            setDesc('')
+            setPrice(0.0)
+            setPaymethod('Efectivo')
+            setType(false)
+        }
     }
 
 
