@@ -1,23 +1,20 @@
 import { RutasAPI } from "../assets/RutasAPI";
-export default async function newTag(name, finanzas, user) {
+export default async function updateTagById(id, name, finanzasArray) {
   try {
     // Realiza la solicitud a la API
-    const response = await fetch(RutasAPI.NewTag, {
-      method: "POST",
+    const response = await fetch(RutasAPI.updateTagById + id, {
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
         name: name,
-        finanzas,
-        finanzas,
-        user: user,
+        finanzas: finanzasArray,
       }),
     });
 
     if (response.ok) {
-      const data = await response.json();
-      return data;
+      return 1;
     } else {
       console.error("Error en la creación de la Tag");
       return 0;

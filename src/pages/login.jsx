@@ -7,7 +7,7 @@ import SubmitButton from "../components/forms/SubmitButton";
 import { useGlobalContext } from "../context/globalContext";
 
 export default function Login() {
-  const { setIsLogged, setUser, setToken, setUserFinanzas, setUserTags } =
+  const { setIsLogged, setUser, setToken, updateFinanzas, updateTags } =
     useGlobalContext();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -27,9 +27,8 @@ export default function Login() {
       setUser(user);
       setIsLogged(true);
       setToken(response.token);
-      setUserFinanzas(user.finanzas);
-      setUserTags(user.tags);
-      console.log(response.token);
+      updateFinanzas(user._id);
+      updateTags(user._id);
       navigate("/dashboard");
     }
   };

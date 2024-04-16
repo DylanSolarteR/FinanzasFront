@@ -7,7 +7,7 @@ import SubmitButton from "../components/forms/SubmitButton";
 import { useGlobalContext } from "../context/globalContext";
 
 function Register() {
-  const { setIsLogged, setUser, setToken, setUserFinanzas, setUserTags } =
+  const { setIsLogged, setUser, setToken, updateFinanzas, updateTags } =
     useGlobalContext();
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -25,12 +25,12 @@ function Register() {
 
     const response = await fetchRegister(username, email, password);
     if (response) {
-      const user = await getUser();
+      const user = await getUser(response.token);
       setUser(user);
       setIsLogged(true);
       setToken(response.token);
-      setUserFinanzas(user.finanzas);
-      setUserTags(user.tags);
+      updateFinanzas(user._id);
+      updateTags(user._id);
       navigate("/dashboard");
     }
   };

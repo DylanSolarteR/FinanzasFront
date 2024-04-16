@@ -1,5 +1,14 @@
 import { RutasAPI } from "../assets/RutasAPI";
-export default async function newFactura(name, description, price, paymethod, date, type, tags, user) {
+export default async function newFactura(
+  name,
+  description,
+  price,
+  paymethod,
+  date,
+  type,
+  tags,
+  user
+) {
   try {
     // Realiza la solicitud a la API
     const response = await fetch(RutasAPI.NewFinanza, {
@@ -15,12 +24,13 @@ export default async function newFactura(name, description, price, paymethod, da
         date: date,
         type: type,
         tags: tags,
-        user: user
+        user: user,
       }),
     });
 
     if (response.ok) {
-      return 1;
+      const data = await response.json();
+      return data;
     } else {
       console.error("Error en la creación de la finanza");
       return 0;

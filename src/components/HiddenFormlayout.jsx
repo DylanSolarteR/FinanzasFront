@@ -1,21 +1,33 @@
-import { useState } from "react"
-import CircleButton from "./CircleButton";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { useGlobalContext } from "@/context/globalContext";
 
-export default function HiddenFormlayout({children}){
-    let [visible, setVisible] = useState(false);
-
-    const change = (visible)=>{
-        setVisible(!visible);
-    }
-    return(<div className="py-4">
-            <CircleButton   id='add'
-                            src="/plus.svg"
-                            imageClassName={"animate-all duration-200 "+(visible? "rotate-45":"rotate-0")}
-                            className={(visible? "bg-rose-600 hover:bg-rose-500":"bg-slate-600 hover:bg-slate-500")}
-                            onClick={()=>{change(visible)}}/>
-                            
-            <div className={"py-4 px-4 mx-auto "+(visible? "":"hidden")}>
-                {children}
-            </div>
-        </div>)
+export default function HiddenFormlayout({ children }) {
+  const { sideBarSelected, dialogOpened, setDialogOpened } = useGlobalContext();
+  return (
+    <div className="py-4 flex flex-col justify-center items-center">
+      <Dialog open={dialogOpened} onOpenChange={setDialogOpened}>
+        <DialogTrigger className="bg-slate-600 hover:bg-slate-500 text-white rounded-lg w-full p-2">
+          AGREGAR {sideBarSelected?.toUpperCase().slice(0, -1)}
+        </DialogTrigger>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>
+              Agregar {sideBarSelected?.toLowerCase().slice(0, -1)}
+            </DialogTitle>
+            <DialogDescription>
+              Rellena los siguientes campos y añade una nueva entrada.
+            </DialogDescription>
+          </DialogHeader>
+          {children}
+        </DialogContent>
+      </Dialog>
+    </div>
+  );
 }

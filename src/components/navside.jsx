@@ -67,8 +67,9 @@ export default function NavSide() {
             {state == 1 ? "Menu" : ""}
           </div>
         </button>
-        {navigation.map((dato) => (
+        {navigation.map((dato, i) => (
           <NavButton
+            key={i}
             text={state == 1 ? dato[1] : ""}
             imgsrc={dato[0]}
             handler={dato[2]}

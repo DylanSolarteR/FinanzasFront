@@ -17,7 +17,7 @@ export default async function fetchRegister(name, correo, pw) {
     if (response.ok) {
       return 1;
     } else {
-      console.error("Error en el inicio de sesión");
+      console.error("Error al añadir usuario");
       return 0;
     }
   } catch (error) {

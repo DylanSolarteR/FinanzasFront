@@ -5,7 +5,7 @@ export default async function fetchUsers(auth) {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: auth
+        Authorization: auth,
       },
     });
 
@@ -13,7 +13,7 @@ export default async function fetchUsers(auth) {
       const data = await response.json();
       return data;
     } else {
-      console.error("Error en el inicio de sesión");
+      console.error("Error al leer usuarios");
       return 0;
     }
   } catch (error) {
