@@ -12,7 +12,8 @@ import {
 } from "@/components/ui/dialog";
 import updateTagById from "../fetchs/updateTagById";
 import updateFinanzaById from "../fetchs/updateFinanzaById";
-import { useState } from "react";
+import FinanceUpdateForm from "../pages/dashboardPages/dashboardForms/FinanceUpdateForm";
+import TagsUpdateForm from "../pages/dashboardPages/dashboardForms/tagsUpdateForm";
 
 export default function DataTable({ data }) {
   const { updateFinanzas, updateTags, sideBarSelected, userTags } =
@@ -116,11 +117,9 @@ export default function DataTable({ data }) {
                             Asegurate de guardar los cambios antes de cerrar.
                           </DialogDescription>
                         </DialogHeader>
-                        <div className="flex flex-col gap-2">
-                          <button className="bg-slate-600 p-2 hover:bg-rose-500 rounded-md text-white">
-                            Guardar
-                          </button>
-                        </div>
+                        {
+                          (sideBarSelected == "finanzas")? <FinanceUpdateForm data={data[i]}/>:<TagsUpdateForm data={data[i]}/>
+                        }
                       </DialogContent>
                     </Dialog>
                   }
