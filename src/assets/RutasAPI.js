@@ -1,13 +1,15 @@
+const dominio = "http://localhost:3000";
 export const RutasAPI = {
-  AddUsuario: "http://localhost:3000/usuario/add",
-  ReadAllUsuarios: "http://localhost:3000/usuario/read",
-  Login: "http://localhost:3000/usuario/login",
-  NewFinanza: "http://localhost:3000/finanza/add",
-  NewTag: "http://localhost:3000/tag/add",
-  DeleteFinanza: "http://localhost:3000/finanza/delete/",
-  DeleteTags: "http://localhost:3000/tag/delete/",
-  ReadFinanzaByUser: "http://localhost:3000/finanza/read-by-user-id/",
-  ReadTagsByUser: "http://localhost:3000/tag/read-by-user-id/",
-  updateTagById: "http://localhost:3000/tag/update/",
-  updateFinanzaById: "http://localhost:3000/finanza/update/",
+  AddUsuario: dominio+"/usuario/add",
+  ReadAllUsuarios: dominio+"/usuario/read",
+
+  Login: dominio+"/usuario/login",
+  NewFinanza: dominio+"/finanza/add",
+  NewTag: dominio+"/tag/add",
+  DeleteFinanza: dominio+"/finanza/delete/",
+  DeleteTags: dominio+"/tag/delete/",
+  ReadFinanzaByUser: dominio+"/finanza/read-by-user-id/",
+  ReadTagsByUser: dominio+"/tag/read-by-user-id/",
+  updateTagById: dominio+"/tag/update/",
+  updateFinanzaById: dominio+"/finanza/update/",
 };

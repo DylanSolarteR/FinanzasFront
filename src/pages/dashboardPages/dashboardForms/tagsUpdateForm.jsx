@@ -2,23 +2,34 @@ import SubmitButton from "../../../components/forms/SubmitButton";
 import { useState } from "react";
 import { useGlobalContext } from "../../../context/globalContext";
 import updateTagById from "../../../fetchs/updateTagById";
+import { useToast } from "../../../components/ui/use-toast";
 
-export default function TagsUpdateForm({data}) {
-  console.log(data)
+export default function TagsUpdateForm({ data }) {
+  // console.log(data)
   const id = data._id
   const finanzasArray = data.finanzas
-  const { user, updateTags, setDialogOpened } = useGlobalContext();
+  const { updateTags, updateFinanzas } = useGlobalContext();
   let [name, setName] = useState(data.name);
-
-  const wait = () => new Promise((resolve) => setTimeout(resolve, 500));
+  const { toast } = useToast()
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const response = await updateTagById(id, name, finanzasArray);
     if (response) {
       updateTags();
-      wait().then(() => setDialogOpened(false));
+      updateFinanzas();
+
+      toast({
+        title: "Actualizado 👍",
+        description: "El registro ha sido actualizado correctamente.",
+      })
+    } else {
+      toast({
+        title: "Error 🚨",
+        description: "El registro no ha sido actualizado.",
+      })
     }
+
   };
 
   return (

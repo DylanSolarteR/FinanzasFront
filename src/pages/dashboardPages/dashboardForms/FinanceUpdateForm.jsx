@@ -2,11 +2,12 @@ import SubmitButton from "../../../components/forms/SubmitButton";
 import updateFinanzaById from "../../../fetchs/updateFinanzaById";
 import { useGlobalContext } from "../../../context/globalContext";
 import { useState } from "react";
+import { useToast } from "../../../components/ui/use-toast";
 
-export default function FinanceUpdateForm({data}) {
+export default function FinanceUpdateForm({ data }) {
   const id = data._id;
   const tags = data.tags
-  const { user, updateFinanzas, setDialogOpened } = useGlobalContext();
+  const { updateFinanzas } = useGlobalContext();
   let [name, setName] = useState(data.name);
   let [description, setDesc] = useState(data.desc);
   let [price, setPrice] = useState(data.price);
@@ -14,7 +15,8 @@ export default function FinanceUpdateForm({data}) {
   let [date, setDate] = useState(data.date);
   let [type, setType] = useState(data.type);
 
-  const wait = () => new Promise((resolve) => setTimeout(resolve, 500));
+  const { toast } = useToast()
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -28,15 +30,17 @@ export default function FinanceUpdateForm({data}) {
       type,
       tags
     );
-
     if (response) {
       updateFinanzas();
-      setName("");
-      setDesc("");
-      setPrice(0.0);
-      setPaymethod("Efectivo");
-      setType(false);
-      wait().then(() => setDialogOpened(false));
+      toast({
+        title: "Actualizado 👍",
+        description: "El registro ha sido actualizado correctamente.",
+      })
+    } else {
+      toast({
+        title: "Error 🚨",
+        description: "El registro no ha sido actualizado.",
+      })
     }
   };
 

@@ -2,22 +2,18 @@ import { useGlobalContext } from "../context/globalContext";
 import deleteFinanzas from "../fetchs/deleteFinanzas";
 import deleteTags from "../fetchs/deleteTags";
 import { Pencil, Trash, Tag } from "lucide-react";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
 import updateTagById from "../fetchs/updateTagById";
 import updateFinanzaById from "../fetchs/updateFinanzaById";
 import FinanceUpdateForm from "../pages/dashboardPages/dashboardForms/FinanceUpdateForm";
 import TagsUpdateForm from "../pages/dashboardPages/dashboardForms/tagsUpdateForm";
+import DialogComponent from "./DialogComponent";
+import { useToast } from "./ui/use-toast";
+
 
 export default function DataTable({ data }) {
   const { updateFinanzas, updateTags, sideBarSelected, userTags } =
     useGlobalContext();
+  const { toast } = useToast()
   return (
     <table className="border shadow-xl text-center">
       <thead>
@@ -103,26 +99,15 @@ export default function DataTable({ data }) {
               )}
               <td className="px-2 w-fit bg-slate-200 border-2 ">
                 <div className="flex gap-2">
-                  {
-                    <Dialog>
-                      <DialogTrigger className="bg-slate-600 p-2 hover:bg-rose-500 rounded-md">
-                        <Pencil className="text-white" />
-                      </DialogTrigger>
-                      <DialogContent>
-                        <DialogHeader>
-                          <DialogTitle>
-                            Editar {sideBarSelected?.toLowerCase().slice(0, -1)}
-                          </DialogTitle>
-                          <DialogDescription>
-                            Asegurate de guardar los cambios antes de cerrar.
-                          </DialogDescription>
-                        </DialogHeader>
-                        {
-                          (sideBarSelected == "finanzas")? <FinanceUpdateForm data={data[i]}/>:<TagsUpdateForm data={data[i]}/>
-                        }
-                      </DialogContent>
-                    </Dialog>
-                  }
+                  <DialogComponent
+                    Trigger={<Pencil className="text-white" />}
+                    Trigger_class={"bg-slate-600 p-2 hover:bg-rose-500 rounded-md"}
+                    Titulo={"Editar " + sideBarSelected?.toLowerCase().slice(0, -1)}
+                    Desc={"Asegurate de guardar los cambios antes de cerrar."}>
+                    {
+                      sideBarSelected == "finanzas" ? <FinanceUpdateForm data={data[i]} /> : <TagsUpdateForm data={data[i]} />
+                    }
+                  </DialogComponent>
 
                   <button
                     title="Eliminar"
@@ -140,56 +125,54 @@ export default function DataTable({ data }) {
                     <Trash className="text-white" />
                   </button>
                   {sideBarSelected == "finanzas" ? (
-                    <Dialog>
-                      <DialogTrigger className="bg-slate-600 p-2 hover:bg-rose-500 rounded-md">
-                        <Tag className="text-white" />
-                      </DialogTrigger>
-                      <DialogContent>
-                        <DialogHeader>
-                          <DialogTitle>Tags</DialogTitle>
-                          <DialogDescription>
-                            Elige un tag para añadir.
-                          </DialogDescription>
-                        </DialogHeader>
-
-                        <div className="flex flex-wrap gap-2">
-                          {userTags.map((tag, key) => (
-                            <button
-                              key={key}
-                              className="bg-slate-600 p-2 hover:bg-rose-500 rounded-md text-white"
-                              onClick={() => {
-                                if (
-                                  data[i].tags
-                                    .map((tag) => tag._id)
-                                    .includes(tag._id)
-                                ) {
-                                  return;
-                                }
-                                updateTagById(tag._id, tag.name, [
-                                  ...tag.finanzas,
-                                  data[i]._id,
-                                ]);
-                                updateFinanzaById(
-                                  data[i]._id,
-                                  data[i].name,
-                                  data[i].desc,
-                                  data[i].price,
-                                  data[i].payMethod,
-                                  data[i].date,
-                                  data[i].type,
-                                  [...data[i].tags, tag._id]
-                                );
-                                updateFinanzas();
-                                updateTags();
-                              }}
-                            >
-                              {tag.name}
-                            </button>
-                          ))}
-                        </div>
-                      </DialogContent>
-                    </Dialog>
+                    <DialogComponent
+                      Trigger={<Tag className="text-white" />}
+                      Trigger_class={"bg-slate-600 p-2 hover:bg-rose-500 rounded-md"}
+                      Titulo={"Tags"}
+                      Desc={"Elige un tag para añadir."}>
+                      <div className="flex flex-wrap gap-2">
+                        {userTags.map((tag, key) => (
+                          <button
+                            key={key}
+                            className="bg-slate-600 p-2 hover:bg-rose-500 rounded-md text-white"
+                            onClick={() => {
+                              if (
+                                data[i].tags
+                                  .map((tag) => tag._id)
+                                  .includes(tag._id)
+                              ) {
+                                toast({
+                                  title: "Error 🚨",
+                                  description: "El Tag ya esta añadido.",
+                                })
+                                return;
+                              }
+                              updateTagById(tag._id, tag.name, [
+                                ...tag.finanzas,
+                                data[i]._id,
+                              ]);
+                              updateFinanzaById(
+                                data[i]._id,
+                                data[i].name,
+                                data[i].desc,
+                                data[i].price,
+                                data[i].payMethod,
+                                data[i].date,
+                                data[i].type,
+                                [...data[i].tags, tag._id]
+                              );
+                              updateFinanzas();
+                              updateTags();
+                            }}
+                          >
+                            {tag.name}
+                          </button>
+                        ))}
+                      </div>
+                    </DialogComponent>
                   ) : null}
+
+
                 </div>
               </td>
             </tr>
